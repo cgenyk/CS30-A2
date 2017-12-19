@@ -14,6 +14,7 @@
 
 // import java libraries here as needed
 
+import javax.swing.*;
 import java.io.*; 					// import file io libraries
 
 
@@ -83,6 +84,17 @@ public class User_Interface {  // begin class
 
         // ************************ print output ****************************
 
+        int addtime1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 1"));
+        int addtime2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 2"));
+        int addtime3 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 3"));
+        int addtime4 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 4"));
+        int addtime5 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 5"));
+
+        System.out.println(addtime1);
+        System.out.println(addtime2);
+        System.out.println(addtime3);
+        System.out.println(addtime4);
+        System.out.println(addtime5);
 
         // ******** closing message *********
 

@@ -14,6 +14,7 @@
 
 // import java libraries here as needed
 
+import javax.swing.*;
 import java.io.*; 					// import file io libraries
 
 
@@ -77,9 +78,13 @@ public class Main {  // begin class
 
         // ************************ processing ***************************
 int id = 0;
-while (id <10){
+int displayid = 1;
+
+while (id <5){
+    int addtime = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Race Result for Racer: " + displayid));
     id++;
-    System.out.println("Id Number: " + id + "|" + " Times" +"|"+ " Avg" + "|"+ " Speed");
+    displayid++;
+    System.out.println("Id Number: " + id + "|" + " Times" +addtime+"|"+   " Avg" + "|"+ " Speed" + "km/h");
 
 }
         // ************************ print output ****************************
