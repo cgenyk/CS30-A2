@@ -16,7 +16,7 @@
 
 import javax.swing.*;
 import java.io.*; 					// import file io libraries
-
+import java.util.*;
 
 public class User_Interface {  // begin class
 
@@ -34,15 +34,18 @@ public class User_Interface {  // begin class
 
         String delim = "[ :]+";		// delimiter string for splitting input string
         String tabSpace = "      ";	// six spaces
-
+        int counter = 1; // Counts the frequancy
+        int curnum = 0; // Current numbber
+        int token1 = 0; // Reading the file
+        int prevnum = 0; // Last number
         // create instances of objects for i/o and formatting
 
         //ConsoleReader console = new ConsoleReader(System.in);
         //DecimalFormat df1 = new DecimalFormat("$##.00");
 
-        //BufferedReader fin = new BufferedReader(new FileReader("name of file"));
-        PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("skaterData.txt")));
-
+        //  BufferedReader fin = new BufferedReader(new FileReader("skaterData.txt"));
+        // PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("testOut.txt")));
+        Scanner inf = new Scanner(new File("skaterData.txt"));
         // ********** Print output Banner **********
 
         System.out.println("*******************************************");
@@ -57,11 +60,7 @@ public class User_Interface {  // begin class
         bannerOut += "Assignment:	Assignment 2\n";
         bannerOut += "*******************************************\n\n";
 
-        fout.println("*******************************************");
-        fout.println("Name:		Connor Genyk");
-        fout.println("Class:		CS30S");
-        fout.println("Assignment:	Assignment 2");
-        fout.println("*******************************************");
+
 
         // ************************ get input **********************
 
@@ -77,33 +76,56 @@ public class User_Interface {  // begin class
     	 * use the value in delim as the delimieter
     	 * uncomment the line to use it.
     	 ************************************/
-        //String[] tokens = strin.split(delim);
+       // String[] tokens = strin.split(delim);
 
 
         // ************************ processing ***************************
 
+
+        List<Integer> temps = new ArrayList<>(); // Makes the array
+
+        // while loop
+        while (inf.hasNextInt()) {
+            // find next line
+           token1 = inf.nextInt();
+
+            temps.add(token1);
+        }
+        inf.close(); // closes file in
+
+
+
+        System.out.println(temps);
+
+
+        int id = 0;
+        int displayid = 1;
+
+        while (id <5){
+            int addtime = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Race Result for Racer: " + displayid));
+            id++;
+            displayid++;
+            System.out.println("Id Number: " + id + "|" + " Times" +addtime+"|"+   " Avg" + "|"+ " Speed" + "km/h");
+
+        }
+
+
+        // AVGxx
+
+     //   time + time + time + time + time + time + time + time +time / counter;
+
+
         // ************************ print output ****************************
 
-        int addtime1 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 1"));
-        int addtime2 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 2"));
-        int addtime3 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 3"));
-        int addtime4 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 4"));
-        int addtime5 = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter time for racer 5"));
-
-        System.out.println(addtime1);
-        System.out.println(addtime2);
-        System.out.println(addtime3);
-        System.out.println(addtime4);
-        System.out.println(addtime5);
 
         // ******** closing message *********
 
         System.out.println("end of processing.");
-        fout.format("%n%nend of processing.");
+        // fout.format("%n%nend of processing.");
 
         // ***** close streams *****
 
         //fin.close();			// close input buffer
-        fout.close();			// close output buffer
+        //  fout.close();			// close output buffer
     }  // end main
 }  // end class

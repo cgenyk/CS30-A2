@@ -15,12 +15,15 @@
 // import java libraries here as needed
 
 import javax.swing.*;
+import java.text.DecimalFormat;
 import java.io.*; 					// import file io libraries
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {  // begin class
 
-    public static void main(String[] args) throws IOException{  // begin main
+    public Main(String[] args) throws IOException{  // begin main
 
         // ********* declaration of constants **********
 
@@ -40,25 +43,29 @@ public class Main {  // begin class
         //ConsoleReader console = new ConsoleReader(System.in);
         //DecimalFormat df1 = new DecimalFormat("$##.00");
 
-        BufferedReader fin = new BufferedReader(new FileReader("skaterData.txt"));
-       // PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("testOut.txt")));
+        //BufferedReader fin = new BufferedReader(new FileReader("name of file"));
+        PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("testOut.txt")));
 
         // ********** Print output Banner **********
 
         System.out.println("*******************************************");
-        System.out.println("Name:		Connor Genyk");
-        System.out.println("Class:		CS30S");
-        System.out.println("Assignment:	Assignment 2");
+        System.out.println("Name:		your name here");
+        System.out.println("Class:		CS20S");
+        System.out.println("Assignment:	Ax Qy");
         System.out.println("*******************************************");
 
         bannerOut = "*******************************************\n";
-        bannerOut += "Name:		Connor Genyk\n";
-        bannerOut += "Class:		CS30S\n";
-        bannerOut += "Assignment:	Assignment 2\n";
+        bannerOut += "Name:		your name here\n";
+        bannerOut += "Class:		CS20S\n";
+        bannerOut += "Assignment:	Ax Qy\n";
         bannerOut += "*******************************************\n\n";
 
-
-
+        fout.println("*******************************************");
+        fout.println("Name:		your name here");
+        fout.println("Class:		CS20S");
+        fout.println("Assignment:	Ax Qy");
+        fout.println("*******************************************");
+        List<Integer> temps = new ArrayList<>();
         // ************************ get input **********************
 
     /*	prompt = "Enter your prompt text here. \n";
@@ -77,27 +84,31 @@ public class Main {  // begin class
 
 
         // ************************ processing ***************************
-int id = 0;
-int displayid = 1;
 
-while (id <5){
-    int addtime = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Race Result for Racer: " + displayid));
-    id++;
-    displayid++;
-    System.out.println("Id Number: " + id + "|" + " Times" +addtime+"|"+   " Avg" + "|"+ " Speed" + "km/h");
-
-}
         // ************************ print output ****************************
 
 
         // ******** closing message *********
 
         System.out.println("end of processing.");
-       // fout.format("%n%nend of processing.");
+        fout.format("%n%nend of processing.");
 
         // ***** close streams *****
 
         //fin.close();			// close input buffer
-      //  fout.close();			// close output buffer
+        fout.close();			// close output buffer
     }  // end main
+
+    private int getAvg(List <Integer> times ){
+            int sum = 0;
+            if(!times.isEmpty()) {
+                for (Integer time : times){
+                    sum +=time;
+                }
+
+            }
+        return sum;
+
+    }
+
 }  // end class
