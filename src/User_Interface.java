@@ -14,6 +14,7 @@ class SkatingRaces {  // begin class
     static class Skater {
         public int id;
         private int[] times;
+
         // constructor
         public Skater(int id, int[] times) {
             this.id = id;
@@ -23,24 +24,38 @@ class SkatingRaces {  // begin class
         public String toString() {
             String times_str = "";
             DecimalFormat df1 = new DecimalFormat("00");
-            for(int i = 0; i < times.length; i+= 2){
-                times_str += df1.format(times[i]) + ":" + df1.format(times[i+1]) + " ";
+            for (int i = 0; i < times.length; i += 2) {
+                times_str += df1.format(times[i]) + ":" + df1.format(times[i + 1]) + " ";
             }
             return Integer.toString(id) + " " + times_str;
         }
 
         public int getAvgInSeconds() {
             int sum = 0;
-            for(int i = 0; i < times.length; i+= 2){
+            int cussum = 0;
+            for (int i = 0; i < times.length; i += 2) {
                 int minutes = times[i];
-                int seconds = times[i+1];
+                int seconds = times[i + 1];
+
                 sum += minutes * 60 + seconds;
+
             }
-            int avg = sum / (times.length / 2);
+            int avg = sum / (times.length / 2 );
             return avg;
         }
-    }
 
+        public int getCusNum() {
+            for (int i = 0; i < times.length; i += 2) {
+                String time = JOptionPane.showInputDialog("Enter time in MM:SS format");
+                String[] units = time.split(":"); //will break the string up into an array
+                int cusminutes = Integer.parseInt(units[0]); //first element
+                int cusseconds = Integer.parseInt(units[1]); //second element
+                int duration = 60 * cusminutes + cusseconds; //add up our values
+                return duration;
+            }
+return 0;
+        }
+    }
     private static List<Skater> skaters = new ArrayList<Skater>(); // Makes the array
 
     public static void loadFile() throws FileNotFoundException {
@@ -68,8 +83,6 @@ class SkatingRaces {  // begin class
         fin.close();
     }
 
-
-
     public static void main(String[] args) throws IOException, ParseException {
         loadFile();
 
@@ -91,7 +104,25 @@ class SkatingRaces {  // begin class
             int minutes = total_seconds / 60;
             int seconds = total_seconds % 60;
 
+
             System.out.println(skater.id + ": " + df1.format(minutes) + ":" + df1.format(seconds) );
+
+        }
+
+        System.out.println("Custom Time: ");
+        for(int i = 0; i < skaters.size(); i++) {
+            Skater skater = skaters.get(i);
+
+
+            int total_seconds =  skater.getCusNum();
+            int cminutes = total_seconds / 60;
+            int cseconds = total_seconds % 60;
+
+
+            System.out.println(skater.id + ": " + df1.format(cminutes)+":"+df1.format(cseconds));
+
+
+
         }
 
         // ********* declaration of constants **********
