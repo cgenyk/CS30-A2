@@ -12,7 +12,7 @@ import java.text.*;
 class SkatingRaces {  // begin class
 
     static class Skater {
-        private int id;
+        public int id;
         private int[] times;
         // constructor
         public Skater(int id, int[] times) {
@@ -23,10 +23,20 @@ class SkatingRaces {  // begin class
         public String toString() {
             String times_str = "";
             DecimalFormat df1 = new DecimalFormat("00");
-            for(int i = 0; i < 20; i+= 2){
-                times_str += df1.format(Integer.toString(times[i])) + ":" + df1.format(Integer.toString(times[i+1])) + " ";
+            for(int i = 0; i < times.length; i+= 2){
+                times_str += df1.format(times[i]) + ":" + df1.format(times[i+1]) + " ";
             }
             return Integer.toString(id) + " " + times_str;
+        }
+
+        public int getAvg() {
+            int sum = 0;
+            for(int i = 0; i < times.length; i+= 2){
+                int hours = times[i];
+                int minutes = times[i+1];
+            }
+            int avg = sum / times.length;
+            return avg;
         }
     }
 
@@ -45,23 +55,35 @@ class SkatingRaces {  // begin class
             token1 = fin.nextLine();
 
             String times_str[] = token1.split(delim);
-            int[] times = new int[20];
+            int[] times = new int[times_str.length];
             for(int i = 0; i < times_str.length; i++){
                 times[i] = Integer.parseInt(times_str[i]);
             }
             Skater skater = new Skater(id, times);
 
             skaters.add(skater);
-            System.out.println(skater.toString());
             id++;
         }
-        fin.close(); // closes file in
+        fin.close();
     }
 
 
 
-    public static void main(String[] args) throws IOException, ParseException {  // begin main
+    public static void main(String[] args) throws IOException, ParseException {
         loadFile();
+
+
+        System.out.println("Times: ");
+        for(int i = 0; i < skaters.size(); i++) {
+            Skater skater = skaters.get(i);
+            System.out.println(skater.toString());
+        }
+
+        System.out.println("Averages: ");
+        for(int i = 0; i < skaters.size(); i++) {
+            Skater skater = skaters.get(i);
+            System.out.println(skater.id + ": " + skater.getAvg());
+        }
 
         // ********* declaration of constants **********
 
