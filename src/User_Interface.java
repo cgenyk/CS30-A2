@@ -21,6 +21,7 @@ class SkatingRaces {  // begin class
             this.times = times;
         }
 
+
         public String toString() {
             String times_str = "";
             DecimalFormat df1 = new DecimalFormat("00");
@@ -44,6 +45,34 @@ class SkatingRaces {  // begin class
             return avg;
         }
 
+
+
+        public int getcusAvgInSeconds() {
+
+            int cussum = 0;
+            for (int i = 0; i < times.length; i += 2) {
+                int cusminutes = times[i];
+                int cusseconds = times[i + 1];
+                int cusavg = cussum += cusminutes * 60 + cusseconds;
+              // cussum += cusminutes * 60 + cusseconds;
+                return cusavg;
+
+            }
+
+            return 0;
+        }
+
+        public int getfinalAvgInSeconds() {
+
+            int finalsum = 0;
+            for (int i = 0; i < times.length; i += 2) {
+
+
+            }
+            int avg = getAvgInSeconds() + getcusAvgInSeconds() / (times.length / 1 );
+            return avg;
+        }
+
         public int getCusNum() {
             for (int i = 0; i < times.length; i += 2) {
                 String time = JOptionPane.showInputDialog("Enter time in MM:SS format");
@@ -53,7 +82,7 @@ class SkatingRaces {  // begin class
                 int duration = 60 * cusminutes + cusseconds; //add up our values
                 return duration;
             }
-return 0;
+            return 0;
         }
     }
     private static List<Skater> skaters = new ArrayList<Skater>(); // Makes the array
@@ -100,14 +129,18 @@ return 0;
             Skater skater = skaters.get(i);
 
 
-            int total_seconds =  skater.getAvgInSeconds();
+            int total_seconds =  skater.getfinalAvgInSeconds();
             int minutes = total_seconds / 60;
             int seconds = total_seconds % 60;
 
 
-            System.out.println(skater.id + ": " + df1.format(minutes) + ":" + df1.format(seconds) );
+
+            System.out.println(skater.id + ": " + df1.format(minutes) + ":" + df1.format(seconds));
 
         }
+
+
+
 
         System.out.println("Custom Time: ");
         for(int i = 0; i < skaters.size(); i++) {
