@@ -108,7 +108,10 @@ public class Main {  // begin class
 
             }
         return sum;
+    }
 
+    private int grabid(){
+        return grabid();
     }
 
 }  // end class

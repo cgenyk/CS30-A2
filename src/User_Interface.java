@@ -1,42 +1,33 @@
-/********************************************************************
- * Programmer:	sveinson
- * Class:  CS20S
- *
- * Assignment: Ax Qy
- * Program Name:  name of public class
- *
- * Description: brief description of program
- *
- * Input: data to be input
- *
- * Output: results to be output
- ***********************************************************************/
+
 
 // import java libraries here as needed
 
 import javax.swing.*;
 import java.io.*; 					// import file io libraries
 import java.util.*;
-
+import java.lang.String;
+import com.sun.org.apache.xalan.internal.lib.ExsltStrings.*;
+import java.lang.*;
+import java.text.*;
 public class User_Interface {  // begin class
 
-    public static void main(String[] args) throws IOException{  // begin main
+    public static void main(String[] args) throws IOException, ParseException {  // begin main
 
         // ********* declaration of constants **********
 
         // ********** declaration of variables **********
 
-        String strin;				// string data input from keyboard
-        String strout;				// processed info string to be output
-        String bannerOut;			// string to print banner to message dialogs
+        String strin;                // string data input from keyboard
+        String strout;                // processed info string to be output
+        String bannerOut;            // string to print banner to message dialogs
 
-        String prompt;				// prompt for use in input dialogs
+        String prompt;                // prompt for use in input dialogs
 
-        String delim = "[ :]+";		// delimiter string for splitting input string
-        String tabSpace = "      ";	// six spaces
+        String delim = "[ :]+";        // delimiter string for splitting input string
+        String tabSpace = "      ";    // six spaces
         int counter = 1; // Counts the frequancy
         int curnum = 0; // Current numbber
-        int token1 = 0; // Reading the file
+        String token1 = ""; // Reading the file
         int prevnum = 0; // Last number
         // create instances of objects for i/o and formatting
 
@@ -47,18 +38,6 @@ public class User_Interface {  // begin class
         // PrintWriter fout = new PrintWriter(new BufferedWriter(new FileWriter("testOut.txt")));
         Scanner inf = new Scanner(new File("skaterData.txt"));
         // ********** Print output Banner **********
-
-        System.out.println("*******************************************");
-        System.out.println("Name:		Connor Genyk");
-        System.out.println("Class:		CS30S");
-        System.out.println("Assignment:	Assignment 2");
-        System.out.println("*******************************************");
-
-        bannerOut = "*******************************************\n";
-        bannerOut += "Name:		Connor Genyk\n";
-        bannerOut += "Class:		CS30S\n";
-        bannerOut += "Assignment:	Assignment 2\n";
-        bannerOut += "*******************************************\n\n";
 
 
 
@@ -76,23 +55,30 @@ public class User_Interface {  // begin class
     	 * use the value in delim as the delimieter
     	 * uncomment the line to use it.
     	 ************************************/
-       // String[] tokens = strin.split(delim);
+        // String[] tokens = strin.split(delim);
 
 
         // ************************ processing ***************************
+        int n = 0;
+        n=   Integer.parseInt(JOptionPane.showInputDialog(null, "How many racers?"));
 
+        List<String> temps = new ArrayList<String>(); // Makes the array
+        String list = String.join(",", temps);
 
-        List<Integer> temps = new ArrayList<>(); // Makes the array
+        for (int i = 0; i < 10; i++) {
+            System.out.print(list);
+        }
+
 
         // while loop
-        while (inf.hasNextInt()) {
+        while (inf.hasNextLine()) {
             // find next line
-           token1 = inf.nextInt();
+            token1 = inf.nextLine();
 
             temps.add(token1);
+
         }
         inf.close(); // closes file in
-
 
 
         System.out.println(temps);
@@ -101,31 +87,32 @@ public class User_Interface {  // begin class
         int id = 0;
         int displayid = 1;
 
-        while (id <5){
-            int addtime = Integer.parseInt(JOptionPane.showInputDialog(null, "Enter Race Result for Racer: " + displayid));
+        while (id < n) {
+            String addtime = JOptionPane.showInputDialog(null, "Enter Race Result for Racer: " + displayid, "Enter", JOptionPane.QUESTION_MESSAGE);
+
             id++;
             displayid++;
-            System.out.println("Id Number: " + id + "|" + " Times" +addtime+"|"+   " Avg" + "|"+ " Speed" + "km/h");
+            System.out.println("Id Number: " + id + " |" + " Times: " + list + addtime + " |" + " Avg" + "|" + " Speed" + "km/h");
 
         }
 
 
-        // AVGxx
+       // DateFormat formatter = new SimpleDateFormat("HH:mm");
+      //  java.sql.Time timeValue = new java.sql.Time(formatter.parse(list).getTime());
+      //  System.out.println(timeValue);
 
-     //   time + time + time + time + time + time + time + time +time / counter;
+            // ************************ print output ****************************
 
 
-        // ************************ print output ****************************
+            // ******** closing message *********
 
+            System.out.println("end of processing.");
+            // fout.format("%n%nend of processing.");
 
-        // ******** closing message *********
+            // ***** close streams *****
 
-        System.out.println("end of processing.");
-        // fout.format("%n%nend of processing.");
+            //fin.close();			// close input buffer
+            //  fout.close();			// close output buffer
+        }  // end main
+    }  // end class
 
-        // ***** close streams *****
-
-        //fin.close();			// close input buffer
-        //  fout.close();			// close output buffer
-    }  // end main
-}  // end class
