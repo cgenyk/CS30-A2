@@ -29,13 +29,14 @@ class SkatingRaces {  // begin class
             return Integer.toString(id) + " " + times_str;
         }
 
-        public int getAvg() {
+        public int getAvgInSeconds() {
             int sum = 0;
             for(int i = 0; i < times.length; i+= 2){
-                int hours = times[i];
-                int minutes = times[i+1];
+                int minutes = times[i];
+                int seconds = times[i+1];
+                sum += minutes * 60 + seconds;
             }
-            int avg = sum / times.length;
+            int avg = sum / (times.length / 2);
             return avg;
         }
     }
@@ -79,10 +80,18 @@ class SkatingRaces {  // begin class
             System.out.println(skater.toString());
         }
 
+        DecimalFormat df1 = new DecimalFormat("00");
+
         System.out.println("Averages: ");
         for(int i = 0; i < skaters.size(); i++) {
             Skater skater = skaters.get(i);
-            System.out.println(skater.id + ": " + skater.getAvg());
+
+
+            int total_seconds =  skater.getAvgInSeconds();
+            int minutes = total_seconds / 60;
+            int seconds = total_seconds % 60;
+
+            System.out.println(skater.id + ": " + df1.format(minutes) + ":" + df1.format(seconds) );
         }
 
         // ********* declaration of constants **********
