@@ -1,18 +1,17 @@
-// RUN THE CLASS ON LINE 166 OR 31
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
-// RUN THE CLASS ON LINE 166
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
+// RUN ON 174
 
 // import java libraries here as needed
 
@@ -224,8 +223,8 @@ class SkatingRaces {  // begin class
 
             System.out.println("---- QUERY RESPONSE: CUSTOM RACE RESULT ----");
 
-            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Racer ID Number "));
-            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Race Number"));
+            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Time | Racer ID Number "));
+            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Time | Race Number"));
             String id = String.valueOf((skaters.get(racerID)));
 
             String[] yolo = id.split(" ");
