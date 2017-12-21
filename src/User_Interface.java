@@ -28,9 +28,8 @@ class SkatingRaces {  // begin class
             for (int i = 0; i < times.length; i += 2) {
                 times_str += df1.format(times[i]) + ":" + df1.format(times[i + 1]) + " ";
             }
-            return Integer.toString(id) +":"+ " " + times_str;
+            return Integer.toString(id) + ":" + " " + times_str;
         }
-
 
 
         public int getAvgInSeconds() {
@@ -43,10 +42,9 @@ class SkatingRaces {  // begin class
                 sum += minutes * 60 + seconds;
 
             }
-            int avg = sum / (times.length / 2 );
+            int avg = sum / (times.length / 2);
             return avg;
         }
-
 
 
         public int getcusAvgInSeconds() {
@@ -56,7 +54,7 @@ class SkatingRaces {  // begin class
                 int cusminutes = times[i];
                 int cusseconds = times[i + 1];
                 int cusavg = cussum += cusminutes * 60 + cusseconds;
-              // cussum += cusminutes * 60 + cusseconds;
+                // cussum += cusminutes * 60 + cusseconds;
                 return cusavg;
 
             }
@@ -71,7 +69,7 @@ class SkatingRaces {  // begin class
 
 
             }
-            int avg = getAvgInSeconds() + getcusAvgInSeconds() / (times.length / 1 );
+            int avg = getAvgInSeconds() + getcusAvgInSeconds() / (times.length / 1);
             return avg;
         }
 
@@ -87,101 +85,87 @@ class SkatingRaces {  // begin class
             return 0;
         }
 
-        public int getkm() {
+        public double getkm(int sec) {
 
-            int timeinhr = getCusNum()*60*60;
-            System.out.println(getCusNum());
-            for (int i = 0; i < times.length; i += 2) {
-                int km = 5/timeinhr;
-                return km;
+            int timeinhr = sec * 60 * 60;
+            // System.out.println(get());
+            //  for (int i = 0; i < times.length; i += 2) {
+            double km = 5 / timeinhr;
+
+
+            return km;
+        }
+
+
+        private static List<Skater> skaters = new ArrayList<Skater>(); // Makes the array
+
+        public static void loadFile() throws FileNotFoundException {
+            String token1 = ""; // Reading the file
+            String delim = "[ :]+";        // delimiter string for splitting input string
+
+            Scanner fin = new Scanner(new FileReader("skaterData.txt"));
+
+            int id = 0;
+            // while loop
+            while (fin.hasNextLine()) {
+                // find next line
+                token1 = fin.nextLine();
+
+                String times_str[] = token1.split(delim);
+                int[] times = new int[times_str.length];
+                for (int i = 0; i < times_str.length; i++) {
+                    times[i] = Integer.parseInt(times_str[i]);
+                }
+                Skater skater = new Skater(id, times);
+
+                skaters.add(skater);
+                id++;
+            }
+            fin.close();
+        }
+
+        public static void main(String[] args) throws IOException, ParseException {
+            loadFile();
+
+            DecimalFormat df1 = new DecimalFormat("00");
+            System.out.println("Times: ");
+
+            for (int i = 0; i < skaters.size(); i++) {
+                Skater skater = skaters.get(i);
+
+
+                int total_seconds = skater.getCusNum();
+                int minutes = total_seconds / 60;
+                int seconds = total_seconds % 60;
+
+                System.out.println(skater.toString() + df1.format(minutes) + ":" + df1.format(seconds));
+
+
+                System.out.println("Averages: ");
+
+
+                int av_seconds = skater.getfinalAvgInSeconds();
+                int avminutes = av_seconds / 60;
+                int avseconds = av_seconds % 60;
+                System.out.println(skater.id + ": " + df1.format(avminutes) + ":" + df1.format(avseconds));
+
+
+                System.out.println("Km: ");
+
+
+                double total_km = skater.getkm(total_seconds);
+
+                System.out.println(skater.id + ": " + total_km);
+
+                System.out.println("---- NEW RACER ----");
             }
 
-            return 0;
-        }
-    }
-    private static List<Skater> skaters = new ArrayList<Skater>(); // Makes the array
 
-    public static void loadFile() throws FileNotFoundException {
-        String token1 = ""; // Reading the file
-        String delim = "[ :]+";        // delimiter string for splitting input string
-
-        Scanner fin = new Scanner(new FileReader("skaterData.txt"));
-
-        int id = 0;
-        // while loop
-        while (fin.hasNextLine()) {
-            // find next line
-            token1 = fin.nextLine();
-
-            String times_str[] = token1.split(delim);
-            int[] times = new int[times_str.length];
-            for(int i = 0; i < times_str.length; i++){
-                times[i] = Integer.parseInt(times_str[i]);
-            }
-            Skater skater = new Skater(id, times);
-
-            skaters.add(skater);
-            id++;
-        }
-        fin.close();
-    }
-
-    public static void main(String[] args) throws IOException, ParseException {
-        loadFile();
-
-        DecimalFormat df1 = new DecimalFormat("00");
-        System.out.println("Times: ");
-
-        for(int i = 0; i < skaters.size(); i++) {
-            Skater skater = skaters.get(i);
-
-
-            int total_seconds =  skater.getCusNum();
-            int minutes = total_seconds / 60;
-            int seconds = total_seconds % 60;
-
-            System.out.println(skater.toString() + df1.format(minutes) +":"+ df1.format(seconds));
-        }
-
-
-
-        System.out.println("Averages: ");
-        for(int i = 0; i < skaters.size(); i++) {
-            Skater skater = skaters.get(i);
-
-
-            int total_seconds =  skater.getfinalAvgInSeconds();
-            int minutes = total_seconds / 60;
-            int seconds = total_seconds % 60;
-            System.out.println(skater.id + ": " + df1.format(minutes) + ":" + df1.format(seconds));
-        }
-
-        System.out.println("Averages: ");
-        for(int i = 0; i < skaters.size(); i++) {
-            Skater skater = skaters.get(i);
-
-
-            int total_seconds =  skater.getkm();
-
-            System.out.println(skater.id + ": " + total_seconds);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-        //  System.out.println(skater.id + ": " + df1.format(cminutes)+":"+df1.format(cseconds));
-
+            //  System.out.println(skater.id + ": " + df1.format(cminutes)+":"+df1.format(cseconds));
 
 
         }
+
 
         // ********* declaration of constants **********
 
@@ -211,7 +195,6 @@ class SkatingRaces {  // begin class
         // ********** Print output Banner **********
 
 
-
         // ************************ get input **********************
 
     /*	prompt = "Enter your prompt text here. \n";
@@ -227,7 +210,6 @@ class SkatingRaces {  // begin class
     	 * uncomment the line to use it.
     	 ************************************/
         // String[] tokens = strin.split(delim);
-
 
 
         //Scanner in = new Scanner(System.in);
@@ -287,6 +269,8 @@ class SkatingRaces {  // begin class
 
         //fin.close();			// close input buffer
         //  fout.close();			// close output buffer
-    }  // end main
-  // end class
+    }
+// end main
+}
+// end class
 
