@@ -114,16 +114,23 @@ class SkatingRaces {  // begin class
             return km;
         }
 
-        public double getcuskm(int cussec) {
+        public double getcuskm() {
 
 
-            String time2 = JOptionPane.showInputDialog("Query: Custom KM Request| Enter time in MM:SS format");
-            String[] units = time2.split(":"); //will break the string up into an array
-            int cusminutes2 = Integer.parseInt(units[0]); //first element
-            int cusseconds2 = Integer.parseInt(units[1]); //second element
+            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Racer ID Number"));
+            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Race Number"));
+            String id = String.valueOf((skaters.get(racerID)));
+            String[] yolo = id.split(" ");
+            String dora = yolo[racenum];
+
+
+            String[] unit = dora.split(":"); //will break the string up into an array
+
+            int cusminutes2 = Integer.parseInt(unit[0]); //first element
+            int cusseconds2 = Integer.parseInt(unit[1]); //second element
             int duration = 60 * cusminutes2 + cusseconds2; //add up our values
 
-            int custimeinhr = duration * 60 * 60;
+            int custimeinhr = duration * 60;
 
             //  for (int i = 0; i < times.length; i += 2) {
             double cuskm = 5.0 / custimeinhr;
@@ -209,25 +216,22 @@ class SkatingRaces {  // begin class
 
             System.out.println("*** END OF RACER DATA | CUSTOM QUERY RESPONSES ***");
             System.out.println("---- QUERY RESPONSE: CUSTOM SPEED ----");
-            int total_seconds = skater.getCusNum();
-            System.out.println("!! RESULT!! Speed is  " + (skater.getcuskm(total_seconds) + " km/h "));
+            double total_seconds2 = skater.getcuskm();
+            System.out.println("!! RESULT!! Speed is  " + (total_seconds2) + " km/h ");
             System.out.println("*** END  QUERY RESPONSE: CUSTOM SPEED ***");
+
+
+
             System.out.println("---- QUERY RESPONSE: CUSTOM RACE RESULT ----");
 
-            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID"));
-            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "ID"));
+            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Racer ID Number "));
+            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "Cus Speed | Race Number"));
             String id = String.valueOf((skaters.get(racerID)));
 
             String[] yolo = id.split(" ");
-            System.out.println(yolo[racenum -1]);
 
-
-
-
-
-
-            System.out.println(id);
-            System.out.println("** RACE # " +racenum+ " SELECTED **");
+            System.out.println("** ID# " + racerID + " RACE # " +racenum+ " SELECTED **");
+            System.out.println(yolo[racenum]);
             System.out.println("*** END  QUERY RESPONSE: Custom Individual Time Request ***");
             System.out.println("*** END OF CUSTOM QUERY RESPONSES *** | Program Stopped");
 
