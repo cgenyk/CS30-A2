@@ -192,8 +192,6 @@ class SkatingRaces {  // begin class
 
         }
 
-    }
-// end main
-}
-// end class
+    } // end main
+} // end class
 
