@@ -1,11 +1,29 @@
+// RUN THE CLASS ON LINE 166 OR 31
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+// RUN THE CLASS ON LINE 166
+
 // import java libraries here as needed
 
 import javax.swing.*;
 import java.io.*; 					// import file io libraries
+import java.math.RoundingMode;
 import java.util.*;
 import java.lang.String;
 import java.lang.*;
 import java.text.*;
+
 
 // JOptionPane.showInputDialog(null, "How many racers?")
 
@@ -75,7 +93,7 @@ class SkatingRaces {  // begin class
 
         public int getCusNum() {
             for (int i = 0; i < times.length; i += 2) {
-                String time = JOptionPane.showInputDialog("Enter time in MM:SS format");
+                String time = JOptionPane.showInputDialog("Enter time in MM:SS format for racer " + id);
                 String[] units = time.split(":"); //will break the string up into an array
                 int cusminutes = Integer.parseInt(units[0]); //first element
                 int cusseconds = Integer.parseInt(units[1]); //second element
@@ -90,7 +108,7 @@ class SkatingRaces {  // begin class
             int timeinhr = sec * 60 * 60;
 
             //  for (int i = 0; i < times.length; i += 2) {
-            double km = 5.0 / timeinhr;
+            double km =  (5.0 / timeinhr);
 
 
             return km;
@@ -99,7 +117,7 @@ class SkatingRaces {  // begin class
         public double getcuskm(int cussec) {
 
 
-            String time2 = JOptionPane.showInputDialog("Enter time in MM:SS format (CUS KM)");
+            String time2 = JOptionPane.showInputDialog("Query: Custom KM Request| Enter time in MM:SS format");
             String[] units = time2.split(":"); //will break the string up into an array
             int cusminutes2 = Integer.parseInt(units[0]); //first element
             int cusseconds2 = Integer.parseInt(units[1]); //second element
@@ -143,17 +161,23 @@ class SkatingRaces {  // begin class
         }
 
 
+
+        /// RUN THIS //
+
         public static void main(String[] args) throws IOException, ParseException {
             loadFile();
 
             DecimalFormat df1 = new DecimalFormat("00");
-            //DecimalFormat df2 = new DecimalFormat("00.##");
-            System.out.println("Times: ");
+
+
+
+
 
             Skater skater = null;
             for (int i = 0; i < skaters.size(); i++) {
                 skater = skaters.get(i);
 
+                System.out.println("Time: ");
 
                 int total_seconds = skater.getCusNum();
 
@@ -177,7 +201,7 @@ class SkatingRaces {  // begin class
                 double total_km = skater.getkm(total_seconds);
 
 
-                System.out.println(skater.id + ": " + total_km);
+                System.out.println(skater.id + ": " + total_km+ " km/h");
 
                 System.out.println("---- NEW RACER ----");
 
@@ -186,11 +210,31 @@ class SkatingRaces {  // begin class
             System.out.println("*** END OF RACER DATA | CUSTOM QUERY RESPONSES ***");
             System.out.println("---- QUERY RESPONSE: CUSTOM SPEED ----");
             int total_seconds = skater.getCusNum();
-            System.out.println(skater.getcuskm(total_seconds));
-            System.out.println("---- !! END OF !! QUERY RESPONSE: CUSTOM SPEED ----");
+            System.out.println("!! RESULT!! Speed is  " + (skater.getcuskm(total_seconds) + " km/h "));
+            System.out.println("*** END  QUERY RESPONSE: CUSTOM SPEED ***");
+            System.out.println("---- QUERY RESPONSE: CUSTOM RACE RESULT ----");
+
+            int racerID = Integer.parseInt(JOptionPane.showInputDialog(null, "ID"));
+            int racenum = Integer.parseInt(JOptionPane.showInputDialog(null, "ID"));
+            String id = String.valueOf((skaters.get(racerID)));
+
+            String[] yolo = id.split(" ");
+            System.out.println(yolo[racenum -1]);
+
+
+
+
+
+
+            System.out.println(id);
+            System.out.println("** RACE # " +racenum+ " SELECTED **");
+            System.out.println("*** END  QUERY RESPONSE: Custom Individual Time Request ***");
             System.out.println("*** END OF CUSTOM QUERY RESPONSES *** | Program Stopped");
 
         }
+
+
+
 
     } // end main
 } // end class
